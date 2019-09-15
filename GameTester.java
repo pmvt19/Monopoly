@@ -1,5 +1,5 @@
 import javax.swing.JOptionPane;
-
+//Used to run the game
 public class GameTester {
 
 	public static void main(String[] args) 
