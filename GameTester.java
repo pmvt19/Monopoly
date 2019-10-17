@@ -1,21 +1,34 @@
 import javax.swing.JOptionPane;
 //Used to run the game
 public class GameTester {
-
+	static int totalNumPlayers;
+	static Gameboard game;
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
 		
-		String temp = JOptionPane.showInputDialog("How Many Players?");
+		String numberOfPlayersString = JOptionPane.showInputDialog("How Many Players?");
 		
-		int temp1 = Integer.parseInt(temp); 
+		int numberOfPlayers = Integer.parseInt(numberOfPlayersString); 
 		
-		Gameboard game = new Gameboard(temp1);
+		game = new Gameboard(numberOfPlayers);
 		
-		System.out.println(game.players.get(0).getSymbol());
-		System.out.println(game.players.get(1).getSymbol());
-		System.out.println(game.players.get(0).getNetWorth());
-		System.out.println(game.players.get(1).getNetWorth());
+		totalNumPlayers = numberOfPlayers;
+		
+		printStatus();
+		
+		while (true) {
+			
+		}
+		
+		
+		
+	}
+	
+	public static void printStatus() {
+		for (int i = 0; i < totalNumPlayers; i++) {
+			System.out.println(game.players.get(i));
+		}
 	}
 
 }
