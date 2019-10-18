@@ -6,6 +6,6 @@ public class CommunityChest extends Plot {
 	}
 	
 	public void invoke(Player player) {
-		
+		System.out.println("Community Chest");
 	}
 }

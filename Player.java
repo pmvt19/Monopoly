@@ -18,6 +18,7 @@ public class Player {
 		myNetWorth = money;
 		mySymbol = JOptionPane.showInputDialog("What symbol would you like");
 		myOrderNumber = orderNum;
+		myProperties = new ArrayList<Property>();
 	}
 	
 	public String getSymbol() {
@@ -28,8 +29,18 @@ public class Player {
 		return myNetWorth;
 	}
 	
-	public int rollDice() {
-		return ((int) (Math.random() * 6) + 1) + ((int) (Math.random() * 6) + 1);
+	public RollResult rollDice() {
+		boolean rollAgain = false;
+		int firstDice = (int) (Math.random() * 6) + 1;
+		int secondDice = (int) (Math.random() * 6) + 1;
+		
+		int rollTotal = firstDice + secondDice;
+		
+		if (firstDice == secondDice) {
+			rollAgain = true;
+		}
+		System.out.println(rollTotal);
+		return new RollResult(rollAgain, rollTotal);
 	}
 	
 	public void updateLocation(int newX, int newY) {
@@ -48,7 +59,10 @@ public class Player {
 		
 		toReturn += "Symbol: " + mySymbol + "\n" +
 					"Order Number: " + myOrderNumber + "\n" +
-					"Net Worth: " + myNetWorth + "\n";
+					"Net Worth: " + myNetWorth + "\n" +
+					"Num of Properties: " + myProperties.size() + "\n" +
+					"My X Position: " + x + "\n" + 
+					"My Y Position: " + y;
 		
 		return toReturn;
 	}

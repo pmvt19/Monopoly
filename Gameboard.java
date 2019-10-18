@@ -15,6 +15,18 @@ public class Gameboard {
 		fillBoard();
 	}
 	
+	public void newPosition(Player player, int movement) {
+		//Logic for the movement around the board
+		//DO NOT FORGET ABOUT THIS
+		
+		player.updateLocation(player.x, (player.y ));
+		
+	}
+	
+	public void checkIfPassedGo(Player player) {
+		
+	}
+	
 	public void fillBoard() {
 		plot[0][0] = new Go("Go"); //You need to make a different class for each plot that is not a property
 		plot[0][1] = new Property("Mediteranean Avenue", 60, 2, 30, 0, 1);

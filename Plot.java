@@ -14,7 +14,7 @@ public class Plot {
 		return myName;
 	}
 	
-	public void invoke() {
+	public void invoke(Player player) {
 		
 	}
 	
