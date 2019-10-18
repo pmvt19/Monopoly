@@ -7,8 +7,14 @@ public class GameTester {
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
+		String nums = "123456789";
+		String numberOfPlayersString;
+		do {
+			numberOfPlayersString = JOptionPane.showInputDialog("How Many Players? (1 - 9)");
+		} while(nums.indexOf(numberOfPlayersString) < 0 || numberOfPlayersString.equals(""));
 		
-		String numberOfPlayersString = JOptionPane.showInputDialog("How Many Players?");
+		
+		
 		
 		int numberOfPlayers = Integer.parseInt(numberOfPlayersString); 
 		
@@ -18,9 +24,9 @@ public class GameTester {
 		
 		printStatus();
 		
-		while (true) {
+		/*while (true) {
 			game.players.get(0).rollDice();
-		}
+		}*/
 		
 		
 		
