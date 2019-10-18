@@ -7,9 +7,10 @@ public class Property extends Plot {
 	int myRentAmount;
 	int myMortgageAmount;
 	boolean isOwned;
+	Player myOwner;
 	
-	public Property(String name, int price, int rent, int mortgage) {
-		super(name);
+	public Property(String name, int price, int rent, int mortgage, int x, int y) {
+		super(name, x, y);
 		myPrice = price;
 		myRentAmount = rent;
 		myMortgageAmount = mortgage;
@@ -41,7 +42,10 @@ public class Property extends Plot {
 				isOwned = true;
 			}
 		} else {
-			player.myNetWorth -= myRentAmount;
+			if (player != myOwner) {
+				player.myNetWorth -= myRentAmount;
+			}
 		}
+		
 	}
 }

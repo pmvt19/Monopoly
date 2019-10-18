@@ -3,6 +3,7 @@ import javax.swing.JOptionPane;
 public class GameTester {
 	static int totalNumPlayers;
 	static Gameboard game;
+	
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
@@ -18,7 +19,7 @@ public class GameTester {
 		printStatus();
 		
 		while (true) {
-			
+			game.players.get(0).rollDice();
 		}
 		
 		
@@ -29,6 +30,10 @@ public class GameTester {
 		for (int i = 0; i < totalNumPlayers; i++) {
 			System.out.println(game.players.get(i));
 		}
+	}
+	
+	public static void fillBoard() {
+		
 	}
 
 }

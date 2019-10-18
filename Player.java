@@ -7,8 +7,12 @@ public class Player {
 	String mySymbol;
 	int myOrderNumber;
 	int myNetWorth;
-
 	ArrayList<Property> myProperties;
+	int lastX = 0;
+	int lastY = 0;
+	int x = 0;
+	int y = 0;
+	int numRailroads = 0;
 	
 	public Player(int money, int orderNum) {
 		myNetWorth = money;
@@ -27,6 +31,17 @@ public class Player {
 	public int rollDice() {
 		return ((int) (Math.random() * 6) + 1) + ((int) (Math.random() * 6) + 1);
 	}
+	
+	public void updateLocation(int newX, int newY) {
+		lastX = x;
+		lastY = y;
+		x = newX;
+		y = newY;
+	}
+	
+	/*public boolean passedGo(int lastX, int lastY, int x, int y) {
+		if ((lastY <= y && lastX < x) || (x == 0 && y == 0) || )
+	}*/
 	
 	public String toString() {
 		String toReturn = "";
