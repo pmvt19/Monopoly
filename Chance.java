@@ -5,6 +5,8 @@ public class Chance extends Plot {
 		super("Chance", x, y);
 	}
 	
+	
+	
 	//Need to insert how to invoke the plot
 
 }

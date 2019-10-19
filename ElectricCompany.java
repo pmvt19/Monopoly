@@ -1,12 +1,19 @@
 
-public class ElectricCompany extends Plot {
+public class ElectricCompany extends Property implements Multiplier {
 	
-	public ElectricCompany(int x, int y) {
-		super("Electric Company", x, y);
+	int multi = 4;
+	
+	public ElectricCompany(int price, int rent, int mortgage, int x, int y) {
+		super("Electric Company", price, rent, mortgage, x, y);
 	}
 	
-	public void invoke() {
-		return;
+	public void invoke(Player player, int roll, Gameboard game) {
+		
+		if (((ElectricCompany) game.plot[2][10]).myOwner != player) {
+			player.myNetWorth -= (multi * roll);
+		}
+		
+		
 	}
 
 }

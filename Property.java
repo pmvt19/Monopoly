@@ -56,7 +56,7 @@ public class Property extends Plot {
 		}
 	}
 	
-	public void buyProperty(Player player) {
+	public void buyProperty(Player player, Gameboard game) {
 		if (!isOwned) {
 			//String userAnswer = JOptionPane.showInputDialog("Would " + player.mySymbol +  " Like to Buy " + myName + "? - Yes or No");
 			//if (userAnswer.equals("Yes") && Player.canPay(player, myPrice)) {
@@ -65,6 +65,10 @@ public class Property extends Plot {
 				player.myProperties.add(this);
 				myOwner = player;
 				isOwned = true;
+				if (utilityOwnerCheck(player, game)) {
+					((ElectricCompany) game.plot[2][10]).multi = 10;
+					((WaterWorks) game.plot[10][2]).multi = 10;
+				}
 			//}
 		}
 	}
@@ -77,6 +81,10 @@ public class Property extends Plot {
 				player.bankrupt = true;
 			}
 		}
+	}
+	
+	public boolean utilityOwnerCheck(Player player, Gameboard game) {
+		return ((ElectricCompany) game.plot[2][10]).myOwner == player && ((WaterWorks) game.plot[10][2]).myOwner == player;
 	}
 	
 	

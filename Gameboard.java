@@ -63,7 +63,7 @@ public class Gameboard {
 		plot[0][9] = new Property("Connecticut Avenue", 120, 8, 60, 0, 9);
 		plot[0][10] = new Jail(0, 10);
 		plot[1][10] = new Property("St. Charles Place", 140, 10, 70, 1, 10);
-		plot[2][10] = new ElectricCompany(2, 10); //This is supposed to be electric company but im too lazy to make it now lol
+		plot[2][10] = new ElectricCompany(150, 0, 0, 2, 10); //This is supposed to be electric company but im too lazy to make it now lol
 		plot[3][10] = new Property("States Avenue", 140, 10, 70, 3, 10);
 		plot[4][10] = new Property("Virginia Avenue", 160, 12, 80, 4, 10);
 		plot[5][10] = new Railroad("Pennsylvania Railroad", 5, 10);
@@ -79,7 +79,7 @@ public class Gameboard {
 		plot[10][5] = new Railroad("B. & O.", 10, 5);
 		plot[10][4] = new Property("Atlantic Avenue", 260, 22, 130, 10, 4);
 		plot[10][3] = new Property("Ventnor Avenue", 260, 22, 130, 10, 3);
-		plot[10][2] = new WaterWorks(10, 2);
+		plot[10][2] = new WaterWorks(150, 0, 0, 10, 2);
 		plot[10][1] = new Property("Marvin Gardens", 280, 24, 140, 10, 1);
 		plot[10][0] = new Jail(10, 0); //Go to jail lol
 		plot[9][0] = new Property("Pacific Avenue", 300, 26, 150, 9, 0);
