@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 //Used to run the game
@@ -112,12 +114,17 @@ public class GameTester {
 		
 		
 		Object[] options1 = new Object[game.players.size() - 1];
-		
+		ArrayList<Player> holdRefPlayers = new ArrayList<Player>();
+		int count = 0;
 		for (int i  = 0; i < game.players.size(); i++) {
 			if (player != game.players.get(i)) {
-				
+				options1[count] = game.players.get(i).mySymbol;
+				holdRefPlayers.add(game.players.get(i));
+				count++;
 			}
 		}
+		
+
 		
 		int result = JOptionPane.showOptionDialog(null,
 				"Ending " + player.mySymbol + "'s Turn; Cash Left: " + player.myNetWorth,
@@ -128,8 +135,55 @@ public class GameTester {
 		        options1,
 		        null);
 		
+		switch(result) { 
+			case 0:
+				tradeWidth(player, holdRefPlayers.get(0));
+				break;
+			case 1:
+				tradeWidth(player, holdRefPlayers.get(1));
+				break;
+			case 2:
+				tradeWidth(player, holdRefPlayers.get(2));
+				break;
+			case 3:
+				tradeWidth(player, holdRefPlayers.get(3));
+				break;
+			case 4:
+				tradeWidth(player, holdRefPlayers.get(4));
+				break;
+			case 5:
+				tradeWidth(player, holdRefPlayers.get(5));
+				break;
+			case 6:
+				tradeWidth(player, holdRefPlayers.get(6));
+				break;
+			case 7:
+				tradeWidth(player, holdRefPlayers.get(7));
+				break;
+		}
+		//JOptionPane.showMessageDialog(new JFrame(), "Trade feature currently unavailable");
+	}
+	
+	public static void tradeWidth(Player player, Player toTradeWith) {
+		Object[] options1 = new Object[toTradeWith.myProperties.size()];
+	
 		
-		JOptionPane.showMessageDialog(new JFrame(), "Trade feature currently unavailable");
+		for (int i  = 0; i < toTradeWith.myProperties.size(); i++) {
+			
+				options1[i] = toTradeWith.myProperties.get(i);
+				
+		}
+		
+
+		
+		int result = JOptionPane.showOptionDialog(null,
+				"Ending " + player.mySymbol + "'s Turn; Cash Left: " + player.myNetWorth,
+		        "Game",
+		        JOptionPane.YES_NO_CANCEL_OPTION,
+		        JOptionPane.PLAIN_MESSAGE,
+		        null,
+		        options1,
+		        null);
 	}
 	
 	public static void buyAndRentTurn(Player player, Plot currentPlot) {
