@@ -13,6 +13,7 @@ public class Player {
 	int x = 0;
 	int y = 0;
 	int numRailroads = 0;
+	boolean bankrupt = false;
 	
 	public Player(int money, int orderNum) {
 		myNetWorth = money;
@@ -50,10 +51,14 @@ public class Player {
 	}
 	
 	public static boolean canPay(Player player, int amount) {
-		if (player.myNetWorth - amount < 0) {
-			return false;
+		if (player.myNetWorth - amount > 0) {
+			return true;
 		}
-		return true;
+		return false;
+	}
+	
+	public static boolean isNegative(Player player) {
+		return (player.myNetWorth < 0);
 	}
 	
 	/*public boolean passedGo(int lastX, int lastY, int x, int y) {

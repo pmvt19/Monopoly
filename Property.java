@@ -41,6 +41,7 @@ public class Property extends Plot {
 		if (!isOwned) {
 			String userAnswer = JOptionPane.showInputDialog("Would " + player.mySymbol +  " Like to Buy " + myName + "? - Yes or No");
 			if (userAnswer.equals("Yes") && Player.canPay(player, myPrice)) {
+				System.out.println("ENTERED");
 				player.myNetWorth -= myPrice;
 				player.myProperties.add(this);
 				isOwned = true;
@@ -48,6 +49,32 @@ public class Property extends Plot {
 		} else {
 			if (player != myOwner) { 
 				player.myNetWorth -= myRentAmount;
+				if (Player.isNegative(player)) {
+					player.bankrupt = true;
+				}
+			}
+		}
+	}
+	
+	public void buyProperty(Player player) {
+		if (!isOwned) {
+			//String userAnswer = JOptionPane.showInputDialog("Would " + player.mySymbol +  " Like to Buy " + myName + "? - Yes or No");
+			//if (userAnswer.equals("Yes") && Player.canPay(player, myPrice)) {
+				//System.out.println("ENTERED");
+				player.myNetWorth -= myPrice;
+				player.myProperties.add(this);
+				myOwner = player;
+				isOwned = true;
+			//}
+		}
+	}
+	
+	public void payRent(Player player) {
+		if (player != myOwner) { 
+			player.myNetWorth -= myRentAmount;
+			myOwner.myNetWorth += myRentAmount;
+			if (Player.isNegative(player)) {
+				player.bankrupt = true;
 			}
 		}
 	}

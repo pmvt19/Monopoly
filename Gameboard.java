@@ -15,6 +15,14 @@ public class Gameboard {
 		fillBoard();
 	}
 	
+	public void testBankrupcy() {
+		for (int i = 0; i < players.size(); i++) {
+			if(players.get(i).bankrupt) {
+				players.remove(i);
+			}
+		}
+	}
+	
 	public void newPosition(Player player, int movement) {
 		//Logic for the movement around the board
 		//DO NOT FORGET ABOUT THIS

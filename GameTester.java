@@ -66,29 +66,75 @@ public class GameTester {
 	
 	public static void invokeTurn(Player player) {
 		RollResult rollResult;
-		
-		do {
-			rollResult = player.rollDice();
-			int movement = rollResult.totalRollNum;
-			game.newPosition(player, movement);
-			game.checkIfPassedGo(player);
-			//printStatus(player);
-			/*System.out.println("X: " + player.x + ", Y: " + player.y);
-			System.out.println("warp");
-			System.out.println(game.plot[player.x][player.y]);*/
-			//System.out.println((Property) game.plot[player.x][player.y]);
-			(game.plot[player.x][player.y]).invoke(player);
-			//printStatus(player);
-			//cSystem.out.println("FINISHED");
+		if (!player.bankrupt) {
+			do {
+				
+				rollResult = player.rollDice();
+				int movement = rollResult.totalRollNum;
+				game.newPosition(player, movement);
+				game.checkIfPassedGo(player);
+				//printStatus(player);
+				///System.out.println("Rolled: " + movement);
+				/*System.out.println("X: " + player.x + ", Y: " + player.y);
+				System.out.println("warp");
+				System.out.println(game.plot[player.x][player.y]);*/
+				//System.out.println((Property) game.plot[player.x][player.y]);
+				Plot currentPlot = game.plot[player.x][player.y];
+				if (currentPlot instanceof Property) {
+					Property currentProp = (Property) currentPlot;
+					printStatus(player);
+					if (!currentProp.isOwned) {
+						Object[] options1 = {"Buy",
+				                 "Pass"};
+							
+						int result = JOptionPane.showOptionDialog(null,
+								"Would " + player.mySymbol +  " Like to Buy " + currentProp.myName + "?",
+				                 "Game",
+				                 JOptionPane.YES_NO_CANCEL_OPTION,
+				                 JOptionPane.PLAIN_MESSAGE,
+				                 null,
+				                 options1,
+				                 null);
+						
+						if (result == 0) {
+							currentProp.buyProperty(player);
+							continue;
+						} else if (result == 1) {
+							//currentProp.payRent(player);
+							continue;
+						}
+					} else {
+						Object[] options1 = {"Pay Rent",
+				                 "Declare Bankrupcy"};
+	
+						int result = JOptionPane.showOptionDialog(null,
+								"Would " + player.mySymbol +  " Like to Pay Rent at " + currentProp.myName + "?",
+				                 "Game",
+				                 JOptionPane.YES_NO_CANCEL_OPTION,
+				                 JOptionPane.PLAIN_MESSAGE,
+				                 null,
+				                 options1,
+				                 null);
+						if (result == 0) {
+							currentProp.payRent(player);
+						} else if (result == 1) {
+							player.bankrupt = true;
+							//game.testBankrupcy();
+							break;
+						}
+						
+					}
+				
+				}
+				//(game.plot[player.x][player.y]).invoke(player);
+				//printStatus(player);
+				//cSystem.out.println("FINISHED");
+				
+				
+			} while(rollResult.canRollAgain);
 			
-			
-		} while(rollResult.canRollAgain);
 		
-		//printStatus();
-		
-		//game.newPosition(player, movement);
-		
-		
+		}
 	}
 
 }
