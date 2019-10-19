@@ -25,17 +25,17 @@ public class GameTester {
 		//printStatus();
 		
 		
-		invokeTurn(game.players.get(0));
-		invokeTurn(game.players.get(1));
+		//invokeTurn(game.players.get(0));
+		//invokeTurn(game.players.get(1));
 		
 		
 		
-		/*while (true) {
+		while (true) {
 			for (int i = 0; i < totalNumPlayers; i++) {
 				invokeTurn(game.players.get(i));
-				//printStatus(game.players.get(i));
+				printStatus(game.players.get(i));
 			}
-		}*/
+		}
 		
 		
 		/*while (true) {
@@ -72,14 +72,14 @@ public class GameTester {
 			int movement = rollResult.totalRollNum;
 			game.newPosition(player, movement);
 			game.checkIfPassedGo(player);
-			printStatus(player);
-			System.out.println("X: " + player.x + ", Y: " + player.y);
+			//printStatus(player);
+			/*System.out.println("X: " + player.x + ", Y: " + player.y);
 			System.out.println("warp");
-			System.out.println(game.plot[player.x][player.y]);
-			System.out.println((Property) game.plot[player.x][player.y]);
+			System.out.println(game.plot[player.x][player.y]);*/
+			//System.out.println((Property) game.plot[player.x][player.y]);
 			(game.plot[player.x][player.y]).invoke(player);
-			printStatus(player);
-			System.out.println("FINISHED");
+			//printStatus(player);
+			//cSystem.out.println("FINISHED");
 			
 			
 		} while(rollResult.canRollAgain);

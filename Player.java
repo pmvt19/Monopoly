@@ -39,7 +39,6 @@ public class Player {
 		if (firstDice == secondDice) {
 			rollAgain = true;
 		}
-		System.out.println(rollTotal);
 		return new RollResult(rollAgain, rollTotal);
 	}
 	
@@ -48,6 +47,13 @@ public class Player {
 		lastY = y;
 		x = newX;
 		y = newY;
+	}
+	
+	public static boolean canPay(Player player, int amount) {
+		if (player.myNetWorth - amount < 0) {
+			return false;
+		}
+		return true;
 	}
 	
 	/*public boolean passedGo(int lastX, int lastY, int x, int y) {

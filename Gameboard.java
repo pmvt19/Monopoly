@@ -19,7 +19,22 @@ public class Gameboard {
 		//Logic for the movement around the board
 		//DO NOT FORGET ABOUT THIS
 		
-		player.updateLocation(player.x, (player.y ));
+		int curX = player.x;
+		int curY = player.y;
+		
+		for (int i = 0; i < movement; i++) {
+			if (curY == 0 && curX != 0) {
+				curX -= 1;
+			} else if (curY == 10 && curX != 10) {
+				curX += 1;
+			} else if (curX == 0 && curY != 10) {
+				curY += 1;
+			} else if (curX == 10 && curY != 0) {
+				curY -= 1; 
+			}
+		}
+		
+		player.updateLocation(curX, curY);
 		
 	}
 	

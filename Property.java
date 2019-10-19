@@ -38,10 +38,9 @@ public class Property extends Plot {
 	}
 	
 	public void invoke(Player player) {
-		System.out.println("INVOKED");
 		if (!isOwned) {
-			String userAnswer = JOptionPane.showInputDialog("Would You Like to Buy " + myName + "? - Yes or No");
-			if (userAnswer.equals("Yes")) {
+			String userAnswer = JOptionPane.showInputDialog("Would " + player.mySymbol +  " Like to Buy " + myName + "? - Yes or No");
+			if (userAnswer.equals("Yes") && Player.canPay(player, myPrice)) {
 				player.myNetWorth -= myPrice;
 				player.myProperties.add(this);
 				isOwned = true;
@@ -51,6 +50,7 @@ public class Property extends Plot {
 				player.myNetWorth -= myRentAmount;
 			}
 		}
-		
 	}
+	
+	
 }

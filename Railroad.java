@@ -8,7 +8,7 @@ public class Railroad extends Property{
 	
 	public void invoke(Player player) {
 		if (!isOwned) {
-			String userAnswer = JOptionPane.showInputDialog("Would You Like to Buy this Property? - Yes or No");
+			String userAnswer = JOptionPane.showInputDialog("Would " + player.mySymbol +  " Like to Buy " + myName + "? - Yes or No");
 			if (userAnswer.equals("Yes")) {
 				player.myNetWorth -= myPrice;
 				player.myProperties.add(this);
