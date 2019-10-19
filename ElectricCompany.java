@@ -11,6 +11,8 @@ public class ElectricCompany extends Property implements Multiplier {
 		
 		if (((ElectricCompany) game.plot[2][10]).myOwner != player) {
 			player.myNetWorth -= (multi * roll);
+			Player owner = ((ElectricCompany) game.plot[2][10]).myOwner;
+			owner.myNetWorth += (multi * roll);
 		}
 		
 		

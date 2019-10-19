@@ -9,8 +9,10 @@ public class WaterWorks extends Property {
 	
 	public void invoke(Player player, int roll, Gameboard game) {
 		
-		if (((WaterWorks) game.plot[2][10]).myOwner != player) {
+		if (((WaterWorks) game.plot[10][2]).myOwner != player) {
 			player.myNetWorth -= (multi * roll);
+			Player owner = ((WaterWorks) game.plot[10][2]).myOwner;
+			owner.myNetWorth += (multi * roll);
 		}
 		
 		

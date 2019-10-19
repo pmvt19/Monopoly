@@ -32,6 +32,7 @@ public class GameTester {
 		
 		
 		while (true) {
+			runStartRoundMessage(game);
 			for (int i = 0; i < totalNumPlayers; i++) {
 				invokeTurn(game.players.get(i));
 				printStatus(game.players.get(i));
@@ -85,10 +86,41 @@ public class GameTester {
 	}
 	
 	public static void endingTurnScreen(Player player) {
-		Object[] options1 = {"End"};
+		Object[] options1 = {"Propose Trade", "End"};
 	
 		int result = JOptionPane.showOptionDialog(null,
-				"Ending " + player.mySymbol + "'s Turn",
+				"Ending " + player.mySymbol + "'s Turn; Cash Left: " + player.myNetWorth,
+		        "Game",
+		        JOptionPane.YES_NO_CANCEL_OPTION,
+		        JOptionPane.PLAIN_MESSAGE,
+		        null,
+		        options1,
+		        null);
+		
+		if (result == 0) {
+			//Place trading function here
+			runTrade(player, game);
+			endingTurnScreen(player);
+		}
+		
+		
+		//return result; //Fix this lol
+	}
+	
+	public static void runTrade(Player player, Gameboard game) {
+		
+		
+		
+		Object[] options1 = new Object[game.players.size() - 1];
+		
+		for (int i  = 0; i < game.players.size(); i++) {
+			if (player != game.players.get(i)) {
+				
+			}
+		}
+		
+		int result = JOptionPane.showOptionDialog(null,
+				"Ending " + player.mySymbol + "'s Turn; Cash Left: " + player.myNetWorth,
 		        "Game",
 		        JOptionPane.YES_NO_CANCEL_OPTION,
 		        JOptionPane.PLAIN_MESSAGE,
@@ -97,12 +129,12 @@ public class GameTester {
 		        null);
 		
 		
-		//return result; //Fix this lol
+		JOptionPane.showMessageDialog(new JFrame(), "Trade feature currently unavailable");
 	}
 	
 	public static void buyAndRentTurn(Player player, Plot currentPlot) {
 		Property currentProp = (Property) currentPlot;
-		printStatus(player);
+		//printStatus(player);
 		if (!currentProp.isOwned) {
 			Object[] options1 = {"Buy",
 	                 "Pass"};
@@ -147,7 +179,7 @@ public class GameTester {
 	
 	public static void runRailroad(Player player, Plot currentPlot) {
 		Railroad currentProp = (Railroad) currentPlot;
-		printStatus(player);
+		//printStatus(player);
 		if (!currentProp.isOwned) {
 			Object[] options1 = {"Buy",
 	                 "Pass"};
@@ -213,17 +245,116 @@ public class GameTester {
 		CommunityChest chest = (CommunityChest) currentPlot;
 		chest.invoke(player);
 	}
+	
+	public static void runStartRoundMessage(Gameboard game) {
+		String toDisplay = "";
+		int totalPlayers = game.players.size();
+		
+		for (int i = 0; i < totalPlayers; i++) {
+			toDisplay += game.players.get(i).toString() + "";
+		}
+		JOptionPane.showMessageDialog(new JFrame(), toDisplay, "Status Update", 1);
+	}
 	//Fix (See below comment)
 	public static void runElectricCompany(Player player, Plot currentPlot, int roll) {
-		JOptionPane.showMessageDialog(new JFrame(), player.mySymbol + " has landed on Electric Company.");
+		
+		ElectricCompany currentProp = (ElectricCompany) currentPlot;
+		//printStatus(player);
+		if (!currentProp.isOwned) {
+			Object[] options1 = {"Buy",
+	                 "Pass"};
+				
+			int result = JOptionPane.showOptionDialog(null,
+					"Would " + player.mySymbol +  " Like to Buy " + currentProp.myName + "?",
+	                 "Game",
+	                 JOptionPane.YES_NO_CANCEL_OPTION,
+	                 JOptionPane.PLAIN_MESSAGE,
+	                 null,
+	                 options1,
+	                 null);
+			
+			if (result == 0) {
+				currentProp.buyProperty(player, game);
+				//continue;
+			} else if (result == 1) {
+				//currentProp.payRent(player);
+				//continue;
+			}
+		} else {
+			Object[] options1 = {"Pay Rent",
+	                 "Declare Bankrupcy"};
+
+			int result = JOptionPane.showOptionDialog(null,
+					"Would " + player.mySymbol +  " Like to Pay Rent at " + currentProp.myName + "?",
+	                 "Game",
+	                 JOptionPane.YES_NO_CANCEL_OPTION,
+	                 JOptionPane.PLAIN_MESSAGE,
+	                 null,
+	                 options1,
+	                 null);
+			if (result == 0) {
+				currentProp.invoke(player, roll, game);
+			} else if (result == 1) {
+				player.bankrupt = true;
+				//game.testBankrupcy();
+				
+			}
+		}
+		
+		
+		/*JOptionPane.showMessageDialog(new JFrame(), player.mySymbol + " has landed on Electric Company.");
 		ElectricCompany electric = (ElectricCompany) currentPlot;
-		electric.invoke(player, roll, game);
+		electric.invoke(player, roll, game);*/
 	}
 	//Fix need to use the custom buttons here instead of the okay button screen
 	public static void runWaterWorks(Player player, Plot currentPlot, int roll) {
-		JOptionPane.showMessageDialog(new JFrame(), player.mySymbol + " has landed on Water Works.");
+		
+		WaterWorks currentProp = (WaterWorks) currentPlot;
+		//printStatus(player);
+		if (!currentProp.isOwned) {
+			Object[] options1 = {"Buy",
+	                 "Pass"};
+				
+			int result = JOptionPane.showOptionDialog(null,
+					"Would " + player.mySymbol +  " Like to Buy " + currentProp.myName + "?",
+	                 "Game",
+	                 JOptionPane.YES_NO_CANCEL_OPTION,
+	                 JOptionPane.PLAIN_MESSAGE,
+	                 null,
+	                 options1,
+	                 null);
+			
+			if (result == 0) {
+				currentProp.buyProperty(player, game);
+				//continue;
+			} else if (result == 1) {
+				//currentProp.payRent(player);
+				//continue;
+			}
+		} else {
+			Object[] options1 = {"Pay Rent",
+	                 "Declare Bankrupcy"};
+
+			int result = JOptionPane.showOptionDialog(null,
+					"Would " + player.mySymbol +  " Like to Pay Rent at " + currentProp.myName + "?",
+	                 "Game",
+	                 JOptionPane.YES_NO_CANCEL_OPTION,
+	                 JOptionPane.PLAIN_MESSAGE,
+	                 null,
+	                 options1,
+	                 null);
+			if (result == 0) {
+				currentProp.invoke(player, roll, game);
+			} else if (result == 1) {
+				player.bankrupt = true;
+				//game.testBankrupcy();
+				
+			}
+		}
+		
+		/*JOptionPane.showMessageDialog(new JFrame(), player.mySymbol + " has landed on Water Works.");
 		WaterWorks water = (WaterWorks) currentPlot;
-		water.invoke(player, roll, game);
+		water.invoke(player, roll, game);*/
 	}
 	
 	public static void invokeTurn(Player player) {
@@ -243,9 +374,7 @@ public class GameTester {
 				System.out.println(game.plot[player.x][player.y]);*/
 				//System.out.println((Property) game.plot[player.x][player.y]);
 				Plot currentPlot = game.plot[player.x][player.y];
-				if (currentPlot instanceof Property) {
-					buyAndRentTurn(player, currentPlot);
-				} else if (currentPlot instanceof IncomeTax) {
+				if (currentPlot instanceof IncomeTax) {
 					runIncomeTax(player, currentPlot);
 				} else if (currentPlot instanceof LuxuryTax) {
 					runLuxuryTax(player, currentPlot);
@@ -256,9 +385,11 @@ public class GameTester {
 				} else if (currentPlot instanceof CommunityChest) {
 					runCommunityChest(player, currentPlot);
 				} else if (currentPlot instanceof ElectricCompany) {
-					runElectricCompany(player, currentPlot, movement);
+					runElectricCompany(player, currentPlot, movement); //Not fully functional - rent not charged properly
 				} else if (currentPlot instanceof WaterWorks) {
-					runWaterWorks(player, currentPlot, movement);
+					runWaterWorks(player, currentPlot, movement); //Not fully functional - rent not charged properly
+				} else if (currentPlot instanceof Property) {
+					buyAndRentTurn(player, currentPlot);
 				}
 				endingTurnScreen(player);
 				//(game.plot[player.x][player.y]).invoke(player);
