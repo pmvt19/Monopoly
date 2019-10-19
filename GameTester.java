@@ -165,14 +165,16 @@ public class GameTester {
 	}
 	
 	public static void tradeWidth(Player player, Player toTradeWith) {
-		Object[] options1 = new Object[toTradeWith.myProperties.size()];
+		Object[] options1 = new Object[toTradeWith.myProperties.size() + 1];
 	
-		
+		ArrayList<Property> holdRefProp = new ArrayList<Property>();
 		for (int i  = 0; i < toTradeWith.myProperties.size(); i++) {
-			
+				holdRefProp.add(toTradeWith.myProperties.get(i));
 				options1[i] = toTradeWith.myProperties.get(i);
 				
 		}
+		
+		options1[toTradeWith.myProperties.size()] = "Cancel";
 		
 
 		
@@ -184,6 +186,22 @@ public class GameTester {
 		        null,
 		        options1,
 		        null);
+		
+		if (result != options1.length - 1) {
+			Object[] choice = {"Yes", "No"};
+			
+			int decision = JOptionPane.showOptionDialog(null,
+					"Would " + toTradeWith.mySymbol + " Like to accept the trade with " + player.mySymbol + " for " + holdRefProp.get(result).myName,
+			        "Trade",
+			        JOptionPane.YES_NO_CANCEL_OPTION,
+			        JOptionPane.PLAIN_MESSAGE,
+			        null,
+			        choice,
+			        null);
+		}
+		
+		
+		
 	}
 	
 	public static void buyAndRentTurn(Player player, Plot currentPlot) {
