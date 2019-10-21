@@ -82,8 +82,10 @@ public class GameTester {
 		
 		if (result == 0) {
 			JOptionPane.showMessageDialog(new JFrame(), player.mySymbol + " has rolled a " + numRolled + "; Doubles: " + doubles);
-			game.newPosition(player, numRolled);
-			game.checkIfPassedGo(player);
+			boolean passedGo = game.newPosition(player, numRolled);
+			if (passedGo) {
+				player.myNetWorth += 200;
+			}
 		}
 	}
 	

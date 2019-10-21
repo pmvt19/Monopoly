@@ -23,10 +23,10 @@ public class Gameboard {
 		}
 	}
 	
-	public void newPosition(Player player, int movement) {
+	public boolean newPosition(Player player, int movement) {
 		//Logic for the movement around the board
 		//DO NOT FORGET ABOUT THIS
-		
+		boolean passedGo = false;
 		int curX = player.x;
 		int curY = player.y;
 		
@@ -40,10 +40,14 @@ public class Gameboard {
 			} else if (curX == 10 && curY != 0) {
 				curY -= 1; 
 			}
+			
+			if (curY == 0 && curX == 0) {
+				passedGo = true;
+			}
 		}
 		
 		player.updateLocation(curX, curY);
-		
+		return passedGo;
 	}
 	
 	public void checkIfPassedGo(Player player) {
