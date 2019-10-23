@@ -13,5 +13,9 @@ public class Jail extends Plot {
 		jailedPlayers.add(player);
 		numOfTurnsJailed.add(0);
 	}
+	
+	public void updateJailTime(Player player) {
+		//if ()
+	}
 
 }
