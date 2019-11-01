@@ -279,6 +279,19 @@ public class GameTester {
 				currentProp.payRent(player);
 			} else if (result == 1) {
 				player.bankrupt = true;
+				if (currentPlot instanceof Property) {
+					Property prop = (Property) currentPlot;
+					Player newOwner = prop.myOwner;
+					newOwner.myNetWorth += player.myNetWorth;
+					player.myNetWorth = 0;
+					for (Property props : player.myProperties) {
+						newOwner.myProperties.add(props);
+					}
+					
+					for (int i = player.myProperties.size() - 1; i >= 0; i++) {
+						player.myProperties.remove(i);
+					}
+				}
 				//game.testBankrupcy();
 				
 			}
@@ -324,6 +337,19 @@ public class GameTester {
 				currentProp.payRent(player);
 			} else if (result == 1) {
 				player.bankrupt = true;
+				if (currentPlot instanceof Property) {
+					Property prop = (Property) currentPlot;
+					Player newOwner = prop.myOwner;
+					newOwner.myNetWorth += player.myNetWorth;
+					player.myNetWorth = 0;
+					for (Property props : player.myProperties) {
+						newOwner.myProperties.add(props);
+					}
+					
+					for (int i = player.myProperties.size() - 1; i >= 0; i++) {
+						player.myProperties.remove(i);
+					}
+				}
 				//game.testBankrupcy();
 				
 			}
@@ -404,6 +430,19 @@ public class GameTester {
 				currentProp.invoke(player, roll, game);
 			} else if (result == 1) {
 				player.bankrupt = true;
+				if (currentPlot instanceof Property) {
+					Property prop = (Property) currentPlot;
+					Player newOwner = prop.myOwner;
+					newOwner.myNetWorth += player.myNetWorth;
+					player.myNetWorth = 0;
+					for (Property props : player.myProperties) {
+						newOwner.myProperties.add(props);
+					}
+					
+					for (int i = player.myProperties.size() - 1; i >= 0; i++) {
+						player.myProperties.remove(i);
+					}
+				}
 				//game.testBankrupcy();
 				
 			}
@@ -455,6 +494,19 @@ public class GameTester {
 				currentProp.invoke(player, roll, game);
 			} else if (result == 1) {
 				player.bankrupt = true;
+				if (currentPlot instanceof Property) {
+					Property prop = (Property) currentPlot;
+					Player newOwner = prop.myOwner;
+					newOwner.myNetWorth += player.myNetWorth;
+					player.myNetWorth = 0;
+					for (Property props : player.myProperties) {
+						newOwner.myProperties.add(props);
+					}
+					
+					for (int i = player.myProperties.size() - 1; i >= 0; i++) {
+						player.myProperties.remove(i);
+					}
+				}
 				//game.testBankrupcy();
 				
 			}
@@ -473,14 +525,7 @@ public class GameTester {
 				rollResult = player.rollDice();
 				int movement = rollResult.totalRollNum;
 				startTurnScreen(player, movement, rollResult.canRollAgain);
-				/*game.newPosition(player, movement);
-				game.checkIfPassedGo(player);*/
-				//printStatus(player);
-				///System.out.println("Rolled: " + movement);
-				/*System.out.println("X: " + player.x + ", Y: " + player.y);
-				System.out.println("warp");
-				System.out.println(game.plot[player.x][player.y]);*/
-				//System.out.println((Property) game.plot[player.x][player.y]);
+				
 				Plot currentPlot = game.plot[player.x][player.y];
 				if (currentPlot instanceof IncomeTax) {
 					runIncomeTax(player, currentPlot);
@@ -493,16 +538,14 @@ public class GameTester {
 				} else if (currentPlot instanceof CommunityChest) {
 					runCommunityChest(player, currentPlot);
 				} else if (currentPlot instanceof ElectricCompany) {
-					runElectricCompany(player, currentPlot, movement); //Not fully functional - rent not charged properly
+					runElectricCompany(player, currentPlot, movement); 
 				} else if (currentPlot instanceof WaterWorks) {
-					runWaterWorks(player, currentPlot, movement); //Not fully functional - rent not charged properly
+					runWaterWorks(player, currentPlot, movement); 
 				} else if (currentPlot instanceof Property) {
 					buyAndRentTurn(player, currentPlot);
 				}
 				endingTurnScreen(player);
-				//(game.plot[player.x][player.y]).invoke(player);
-				//printStatus(player);
-				//cSystem.out.println("FINISHED");
+				
 				
 				
 			} while(rollResult.canRollAgain);

@@ -73,7 +73,8 @@ public class Player {
 					"Net Worth: " + myNetWorth + "\n" +
 					"Num of Properties: " + myProperties.size() + "\n" +
 					"My X Position: " + x + "\n" + 
-					"My Y Position: " + y + "\n\n";
+					"My Y Position: " + y + "\n" + 
+					"Is Bankrupt: " + bankrupt + "\n\n";
 		
 		return toReturn;
 	}

@@ -19,6 +19,7 @@ public class Gameboard {
 		for (int i = 0; i < players.size(); i++) {
 			if(players.get(i).bankrupt) {
 				players.remove(i);
+				return;
 			}
 		}
 	}
@@ -48,10 +49,6 @@ public class Gameboard {
 		
 		player.updateLocation(curX, curY);
 		return passedGo;
-	}
-	
-	public void checkIfPassedGo(Player player) {
-		
 	}
 	
 	public void fillBoard() {
