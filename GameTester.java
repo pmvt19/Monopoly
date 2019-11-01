@@ -129,7 +129,7 @@ public class GameTester {
 
 		
 		int result = JOptionPane.showOptionDialog(null,
-				"Ending " + player.mySymbol + "'s Turn; Cash Left: " + player.myNetWorth,
+				"Who would " + player.mySymbol + " like to trade with?",
 		        "Game",
 		        JOptionPane.YES_NO_CANCEL_OPTION,
 		        JOptionPane.PLAIN_MESSAGE,
@@ -168,6 +168,32 @@ public class GameTester {
 	
 	public static void tradeWidth(Player player, Player toTradeWith) {
 		Object[] options1 = new Object[toTradeWith.myProperties.size() + 1];
+		Object[] myProps = new Object[player.myProperties.size() + 1];
+		
+		ArrayList<Property> holdProps = new ArrayList<Property>();
+		for (int i  = 0; i < player.myProperties.size(); i++) {
+			holdProps.add(player.myProperties.get(i));
+			myProps[i] = player.myProperties.get(i);
+			
+		}
+		
+		myProps[player.myProperties.size()] = "Cancel"; 
+		
+		int myProp = JOptionPane.showOptionDialog(null,
+				"Choose " + player.mySymbol + "'s property to trade with",
+		        "Game",
+		        JOptionPane.YES_NO_CANCEL_OPTION,
+		        JOptionPane.PLAIN_MESSAGE,
+		        null,
+		        myProps,
+		        null);
+		Property mineToTrade = null;
+		if (myProp < player.myProperties.size()) {
+			mineToTrade = holdProps.get(myProp);
+		} else {
+			return;
+		}
+		
 	
 		ArrayList<Property> holdRefProp = new ArrayList<Property>();
 		for (int i  = 0; i < toTradeWith.myProperties.size(); i++) {
@@ -181,13 +207,15 @@ public class GameTester {
 
 		
 		int result = JOptionPane.showOptionDialog(null,
-				"Ending " + player.mySymbol + "'s Turn; Cash Left: " + player.myNetWorth,
+				"Choose " + toTradeWith.mySymbol + "'s property to trade with",
 		        "Game",
 		        JOptionPane.YES_NO_CANCEL_OPTION,
 		        JOptionPane.PLAIN_MESSAGE,
 		        null,
 		        options1,
 		        null);
+		Property toTrade = holdRefProp.get(result);
+		
 		
 		if (result != options1.length - 1) {
 			Object[] choice = {"Yes", "No"};
@@ -200,6 +228,12 @@ public class GameTester {
 			        null,
 			        choice,
 			        null);
+			if (decision == 0) {
+				player.myProperties.add(toTrade);
+				player.myProperties.remove(mineToTrade);
+				toTradeWith.myProperties.add(mineToTrade);
+				toTradeWith.myProperties.remove(toTrade);
+			}
 		}
 		
 		
