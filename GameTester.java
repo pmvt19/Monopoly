@@ -517,11 +517,24 @@ public class GameTester {
 		water.invoke(player, roll, game);*/
 	}
 	
+	public static void sendToJail(Player player) {
+		player.updateLocation(0, 10);
+		Jail jail = (Jail) game.plot[0][10];
+		jail.addPlayerToJail(player);
+		
+		
+	}
+	
 	public static void invokeTurn(Player player) {
+		
 		RollResult rollResult;
+		int iteration = 0;
 		if (!player.bankrupt) {
 			do {
-				
+				iteration++;
+				if (iteration == 3) {
+					sendToJail(player);
+				}
 				rollResult = player.rollDice();
 				int movement = rollResult.totalRollNum;
 				startTurnScreen(player, movement, rollResult.canRollAgain);

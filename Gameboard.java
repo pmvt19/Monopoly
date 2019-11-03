@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Gameboard {
 	Plot[][] plot;
 	ArrayList<Player> players;
+	Jail jail;
 	
 	public Gameboard(int amountOfPlayers) {
 		players = new ArrayList<Player>();
@@ -13,6 +14,7 @@ public class Gameboard {
 		plot = new Plot[11][11];
 		
 		fillBoard();
+		//jail = new Jail();
 	}
 	
 	public void testBankrupcy() {
